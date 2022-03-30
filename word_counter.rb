@@ -3,6 +3,9 @@ FILE_NAME = 'romeo-juliet.txt'
 # Load only words from the file
 def words_from_file(text_file)
   File.read(text_file).downcase.gsub(/[^a-z]/, ' ').split
+rescue
+  puts 'Please insert the correct .txt file'
+  exit
 end
 
 # Load the list of words in the text
@@ -16,4 +19,7 @@ words.each do |word|
   word_count[word] ? word_count[word] += 1 : word_count[word] = 1
 end
 
-p word_count['romeo']
+# Show each word and the times it appears in the text
+word_count.sort_by { |word, count| count }
+          .reverse
+          .each { |word, count| puts "#{word}: #{count}" }
